@@ -22,7 +22,21 @@ loop:
         #  Write your code here
         ########################################################################
 
+	#to s1 deixnei sthn arxi kai to s2 deixnei sto telos
+	#epanaliptika fortwnw tous xarakthres kai oso einai idioi synexizw
+loop2:	
+	lbu	$t1, 0($s1)	#fortwnw ton xarakthra apo thn arxi ston t1
+	lbu	$t2, 0($s2)	#fortwnw ton xarakthra apo to telos ston t2
+	bne	$t1, $t2, notpal
+        addiu 	$s1, $s1, 1	#proxwraw ton s1 mia thesi mprosta
+        addiu	$s2, $s2, -1	#fernw ton s2 mia thesi pisw
+        blt	$s1, $s2, loop2
         
+        #an ftasei edw shmainei pws den exei alla psifia ara einai palindromo
+        
+        addiu	$a0, $zero, 0
+        j	exit
+notpal:	addiu 	$a0, $zero, 1
 exit: 
         addiu      $v0, $zero, 10    # system service 10 is exit
         syscall                      # we are outta here.
@@ -30,4 +44,4 @@ exit:
 ###############################################################################
 
         .data
-mesg:   .asciiz "racecar"
+mesg:   .asciiz "raace   ecaar"
